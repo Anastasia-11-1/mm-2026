@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Пульс покупок</title>
+  <style>
+    :root{--bg:#f5f7f5;--card:#fff;--ink:#17231f;--muted:#7a8680;--line:#e5ebe7;--green:#177b58;--green-soft:#e1f3e9;--orange:#e89042;--orange-soft:#fff0e2;--violet:#7768df;--violet-soft:#eeebff;--shadow:0 14px 38px rgba(27,51,41,.065)}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1480px;margin:0 auto;padding:40px 44px 64px}.top{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:28px}.eyebrow{margin-bottom:9px;color:var(--green);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.title{margin:0 0 8px;font-size:clamp(28px,3vw,40px);letter-spacing:-.055em;line-height:1.05}.sub{margin:0;color:var(--muted);font-size:14px}.period{padding:11px 15px;border:1px solid #cde8da;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:12px;font-weight:750;white-space:nowrap}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:20px}.card,.panel{border:1px solid var(--line);border-radius:22px;background:var(--card);box-shadow:var(--shadow)}.metric{min-width:0;padding:21px 22px 15px}.metric-head{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:13px;font-weight:750}.metric-icon{display:grid;width:34px;height:34px;place-items:center;border-radius:11px;font-size:16px;font-weight:800}.metric:nth-child(1) .metric-icon{background:var(--green-soft);color:var(--green)}.metric:nth-child(2) .metric-icon{background:var(--orange-soft);color:var(--orange)}.metric:nth-child(3) .metric-icon{background:var(--violet-soft);color:var(--violet)}.metric-value{margin:16px 0 2px;font-size:30px;font-weight:820;letter-spacing:-.055em}.metric-note{color:var(--muted);font-size:11px}.metric-chart{height:142px;margin:13px -5px 0}.metric-chart svg{display:block;width:100%;height:100%;overflow:visible}.metric-chart .gridline{stroke:#eef2ef;stroke-width:1}.metric-chart .axis-label{fill:#a1aaa5;font-size:9px}.metric-chart .point{fill:#fff;stroke-width:2}.metric-chart .hit{fill:transparent;cursor:crosshair}.metric-chart .tip{pointer-events:none;opacity:0}.metric-chart .tip rect{fill:#18241f}.metric-chart .tip text{fill:#fff;font-size:10px;font-weight:700}.metric-chart .tip.visible{opacity:1}.content{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.panel{min-width:0;padding:24px}.panel-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:21px}.panel h2{margin:0 0 5px;font-size:18px;letter-spacing:-.035em}.panel-description{margin:0;color:var(--muted);font-size:12px}.controls{display:flex;flex-shrink:0;gap:3px;padding:4px;border-radius:12px;background:#f1f4f1}.controls button{border:0;padding:8px 11px;border-radius:9px;background:transparent;color:var(--muted);cursor:pointer;font:700 11px inherit}.controls button.active{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(20,40,31,.08)}.bars{display:flex;flex-direction:column;gap:14px;min-height:450px}.bar-row{display:grid;grid-template-columns:24px 42px minmax(0,1fr) auto;align-items:center;gap:10px}.rank{color:#a2aca6;font-size:11px;font-weight:800}.thumb{width:42px;height:42px;border:1px solid var(--line);border-radius:12px;object-fit:contain;background:#fafcfb}.category-icon{display:grid;place-items:center;color:var(--green);background:var(--green-soft);font-size:16px;font-weight:800}.bar-label{min-width:0}.bar-name{margin-bottom:7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:700}.bar-track{height:7px;overflow:hidden;border-radius:99px;background:#edf2ee}.bar-fill{height:100%;min-width:3px;border-radius:99px;background:var(--green)}.amount .bar-fill{background:var(--orange)}.bar-value{padding-left:8px;color:var(--ink);font-size:12px;font-weight:800;white-space:nowrap}.legend{margin-top:18px;padding-top:13px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}.dot{display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:var(--green)}.dot.orange{background:var(--orange)}.empty{display:grid;min-height:260px;place-items:center;color:var(--muted);font-size:13px}
+    @media(max-width:980px){main{padding:30px 22px 50px}.metrics{grid-template-columns:1fr}.content{grid-template-columns:1fr}.metric-chart{height:130px}}
+    .date-filter{display:flex;align-items:flex-end;gap:10px;margin-bottom:20px;padding:16px 18px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}.date-field{display:flex;flex-direction:column;gap:6px}.date-field label{color:var(--muted);font-size:11px;font-weight:750}.date-field input{height:36px;padding:0 10px;border:1px solid var(--line);border-radius:10px;background:#fbfcfb;color:var(--ink);font:600 12px inherit;outline:none}.date-field input:focus{border-color:#9bcfb3;box-shadow:0 0 0 3px #e6f5ec}.date-reset{height:36px;padding:0 12px;border:0;border-radius:10px;background:var(--green-soft);color:var(--green);cursor:pointer;font:750 12px inherit}.date-hint{margin-left:auto;padding-bottom:9px;color:var(--muted);font-size:11px}
+    @media(max-width:620px){main{padding:24px 14px 40px}.top{display:block}.period{display:inline-block;margin-top:18px}.date-filter{align-items:stretch;flex-wrap:wrap}.date-field{flex:1;min-width:130px}.date-reset{align-self:flex-end}.date-hint{width:100%;margin:0;padding:0}.panel{padding:18px 15px}.panel-head{display:block}.controls{display:inline-flex;margin-top:14px}.bar-row{grid-template-columns:20px 38px minmax(0,1fr) auto;gap:8px}.thumb{width:38px;height:38px}.bar-value{font-size:11px}.metric-value{font-size:28px}}
+  </style>
+</head>
+<body>
+  <main>
+    <header class="top">
+      <div><div class="eyebrow">personal grocery analytics</div><h1 class="title">Пульс покупок</h1><p class="sub">Динамика заказов и потребления по данным вашей корзины</p></div>
+      <div class="period" id="period">Загрузка данных…</div>
+    </header>
+
+    <section class="date-filter" aria-label="Выбор периода">
+      <div class="date-field"><label for="dateFrom">Дата от</label><input id="dateFrom" type="date"></div>
+      <div class="date-field"><label for="dateTo">Дата до</label><input id="dateTo" type="date"></div>
+      <button class="date-reset" id="resetDates" type="button">Весь период</button>
+      <div class="date-hint" id="dateHint">—</div>
+    </section>
+
+    <section class="metrics" aria-label="Метрики по месяцам">
+      <article class="card metric"><div class="metric-head"><span>Количество заказов</span><span class="metric-icon">↗</span></div><div class="metric-value" id="ordersValue">—</div><div class="metric-note">уникальные заказы, по месяцам</div><div class="metric-chart" id="ordersChart"></div></article>
+      <article class="card metric"><div class="metric-head"><span>Общая сумма трат</span><span class="metric-icon">₽</span></div><div class="metric-value" id="spendValue">—</div><div class="metric-note">сумма по колонке amount</div><div class="metric-chart" id="spendChart"></div></article>
+      <article class="card metric"><div class="metric-head"><span>Средняя скидка</span><span class="metric-icon">%</span></div><div class="metric-value" id="discountValue">—</div><div class="metric-note">среднее значение discount за строку</div><div class="metric-chart" id="discountChart"></div></article>
+    </section>
+
+    <section class="content" aria-label="Рейтинги товаров">
+      <article class="panel"><div class="panel-head"><div><h2>Что покупают чаще</h2><p class="panel-description">Топ товаров по количеству заказов</p></div><div class="controls" data-target="count"><button class="active" data-mode="all">Все товары</button><button data-mode="category">Категории</button></div></div><div id="countBars" class="bars"></div><div class="legend"><span class="dot"></span>уникальные заказы</div></article>
+      <article class="panel"><div class="panel-head"><div><h2>На что тратят больше</h2><p class="panel-description">Топ товаров по сумме трат</p></div><div class="controls" data-target="amount"><button class="active" data-mode="all">Все товары</button><button data-mode="category">Категории</button></div></div><div id="amountBars" class="bars amount"></div><div class="legend"><span class="dot orange"></span>сумма трат</div></article>
+    </section>
+  </main>
+
+  <script>
+    const state={rows:[],positions:[],mode:{count:'all',amount:'all'}};
+    const $=id=>document.getElementById(id);
+    const numberFormat=new Intl.NumberFormat('ru-RU');
+    const rub=n=>numberFormat.format(Math.round(n))+' ₽';
+    const clean=s=>(s||'').replace(/^\uFEFF/,'').normalize('NFC');
+    const escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    function parseCsv(text,separator=','){
+      const rows=[];let row=[],cell='',quoted=false;
+      for(let i=0;i<text.length;i++){const c=text[i],next=text[i+1];
+        if(c==='"'&&quoted&&next==='"'){cell+='"';i++;continue}
+        if(c==='"'){quoted=!quoted;continue}
+        if(c===separator&&!quoted){row.push(cell);cell='';continue}
+        if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&next==='\n')i++;row.push(cell);if(row.some(Boolean))rows.push(row);row=[];cell='';continue}
+        cell+=c;
+      }
+      if(cell||row.length){row.push(cell);rows.push(row)}
+      const headers=(rows.shift()||[]).map(clean);
+      return rows.map(values=>Object.fromEntries(headers.map((h,i)=>[h,(values[i]||'').trim()])))
+    }
+
+    const monthLabel=key=>{const [year,month]=key.split('-');return new Intl.DateTimeFormat('ru-RU',{month:'short',year:'2-digit'}).format(new Date(+year,+month-1,1)).replace('.','')};
+    function filteredRows(){const from=$("dateFrom").value,to=$("dateTo").value;return state.rows.filter(r=>(!from||r.order_date>=from)&&(!to||r.order_date<=to))}
+    function monthly(rows=filteredRows()){const byMonth={};rows.forEach(r=>{const key=r.order_date.slice(0,7);byMonth[key]??={orders:new Set(),spend:0,discount:0,rows:0};byMonth[key].orders.add(r.order_id);byMonth[key].spend+=Number(r.amount)||0;byMonth[key].discount+=Number(r.discount)||0;byMonth[key].rows++});return Object.entries(byMonth).sort(([a],[b])=>a.localeCompare(b)).map(([month,x])=>({month,orders:x.orders.size,spend:x.spend,discount:x.rows?x.discount/x.rows:0}))}
+
+    function lineChart(values,color,labels,formatter){
+      const width=640,height=142,left=8,right=8,top=15,bottom=25,max=Math.max(...values,1),min=Math.min(...values),range=max-min||1;
+      const x=i=>left+i*(width-left-right)/Math.max(values.length-1,1),y=v=>top+(max-v)*(height-top-bottom)/range;
+      const points=values.map((v,i)=>`${x(i)},${y(v)}`).join(' '), gid='gradient'+color.slice(1);
+      const labelStep=Math.max(1,Math.ceil(labels.length/7));
+      let svg=`<svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" role="img" aria-label="График по месяцам"><defs><linearGradient id="${gid}" x1="0" x2="0" y1="0" y2="1"><stop stop-color="${color}" stop-opacity=".2"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>`;
+      [0,.5,1].forEach(v=>{const yy=top+v*(height-top-bottom);svg+=`<line class="gridline" x1="${left}" x2="${width-right}" y1="${yy}" y2="${yy}"/>`});
+      svg+=`<polygon points="${left},${height-bottom} ${points} ${width-right},${height-bottom}" fill="url(#${gid})"/><polyline points="${points}" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+      values.forEach((v,i)=>{const xx=x(i),yy=y(v);svg+=`<circle class="point" cx="${xx}" cy="${yy}" r="3" stroke="${color}"/><circle class="hit" data-i="${i}" cx="${xx}" cy="${yy}" r="12"/>`;if(i%labelStep===0||i===values.length-1)svg+=`<text class="axis-label" x="${xx}" y="${height-6}" text-anchor="middle">${labels[i]}</text>`});
+      svg+=`<g class="tip" id="tip"><rect rx="6" width="112" height="26" x="0" y="0"/><text x="56" y="17" text-anchor="middle"></text></g></svg>`;
+      return {svg,formatter};
+    }
+    function attachChart(el,values,color,labels,formatter){el.innerHTML=lineChart(values,color,labels,formatter).svg;const svg=el.querySelector('svg'),tip=svg.querySelector('.tip'),text=tip.querySelector('text');svg.querySelectorAll('.hit').forEach(hit=>hit.addEventListener('mouseenter',()=>{const i=+hit.dataset.i,point=values[i],x=+hit.getAttribute('cx'),y=+hit.getAttribute('cy'),tx=Math.max(3,Math.min(640-115,x-56));tip.setAttribute('transform',`translate(${tx},${Math.max(1,y-34)})`);text.textContent=`${labels[i]} · ${formatter(point)}`;tip.classList.add('visible')}));el.addEventListener('mouseleave',()=>tip.classList.remove('visible'))}
+
+    function renderMetrics(){const rows=filteredRows(),data=monthly(rows),last=data.at(-1),totalOrders=new Set(rows.map(r=>r.order_id)).size,totalSpend=rows.reduce((sum,r)=>sum+(Number(r.amount)||0),0),avgDiscount=rows.length?rows.reduce((sum,r)=>sum+(Number(r.discount)||0),0)/rows.length:0;$("ordersValue").textContent=numberFormat.format(totalOrders);$("spendValue").textContent=rub(totalSpend);$("discountValue").textContent=numberFormat.format(avgDiscount.toFixed(1))+' ₽';$("period").textContent=data.length?`${monthLabel(data[0].month)} — ${monthLabel(last.month)}`:'Нет данных';$("dateHint").textContent=`Строк: ${numberFormat.format(rows.length)}`;const labels=data.map(x=>monthLabel(x.month));if(!data.length){["ordersChart","spendChart","discountChart"].forEach(id=>$(id).innerHTML='<div class="empty">Нет данных за выбранный период</div>');return}attachChart($("ordersChart"),data.map(x=>x.orders),'#177b58',labels,v=>numberFormat.format(v));attachChart($("spendChart"),data.map(x=>x.spend),'#e89042',labels,rub);attachChart($("discountChart"),data.map(x=>x.discount),'#7768df',labels,v=>numberFormat.format(v.toFixed(1))+' ₽')}
+
+    function imageFor(name){const item=state.positions.find(p=>clean(p['Название позиции'])===clean(name));return item?`items/${encodeURIComponent(item['Файл'])}`:''}
+    function renderBars(kind){const mode=state.mode[kind],groups={},rows=filteredRows();rows.forEach(r=>{const key=mode==='all'?r.item_name:r.category;groups[key]??={name:key,value:0,orders:new Set()};groups[key].orders.add(r.order_id);if(kind==='amount')groups[key].value+=Number(r.amount)||0});Object.values(groups).forEach(x=>{if(kind==='count')x.value=x.orders.size});const list=Object.values(groups).sort((a,b)=>b.value-a.value).slice(0,10),max=list[0]?.value||1;$(kind+'Bars').innerHTML=list.map((x,i)=>{const thumb=mode==='all'?`<img class="thumb" src="${imageFor(x.name)}" alt="" onerror="this.style.visibility='hidden'">`:'';return `<div class="bar-row"><span class="rank">${String(i+1).padStart(2,'0')}</span>${thumb}<div class="bar-label"><div class="bar-name" title="${escapeHtml(x.name)}">${escapeHtml(x.name)}</div><div class="bar-track"><div class="bar-fill" style="width:${x.value/max*100}%"></div></div></div><div class="bar-value">${kind==='amount'?rub(x.value):numberFormat.format(x.value)}</div></div>`}).join('')||'<div class="empty">Нет данных</div>'}
+
+    document.querySelectorAll('.controls button').forEach(button=>button.addEventListener('click',()=>{const controls=button.parentElement;controls.querySelectorAll('button').forEach(x=>x.classList.remove('active'));button.classList.add('active');state.mode[controls.dataset.target]=button.dataset.mode;renderBars(controls.dataset.target)}));
+    function rerender(){renderMetrics();renderBars('count');renderBars('amount')}
+    [$("dateFrom"),$("dateTo")].forEach(input=>input.addEventListener('change',()=>{if($("dateFrom").value&&$("dateTo").value&&$("dateFrom").value>$("dateTo").value){const other=input===$("dateFrom")?$("dateTo"):$("dateFrom");other.value=input.value}rerender()}));
+    $("resetDates").addEventListener('click',()=>{$("dateFrom").value='';$("dateTo").value='';rerender()});
+    Promise.all([fetch('Визуализация_Датасет_Вариант C.csv').then(r=>r.text()),fetch('positions.csv').then(r=>r.text())]).then(([data,positions])=>{state.rows=parseCsv(data);state.positions=parseCsv(positions,';');const dates=state.rows.map(r=>r.order_date).sort();$("dateFrom").min=dates[0];$("dateFrom").max=dates.at(-1);$("dateTo").min=dates[0];$("dateTo").max=dates.at(-1);rerender()}).catch(error=>{document.querySelector('.sub').textContent='Не удалось загрузить локальные данные';console.error(error)});
+  </script>
+</body>
+</html>
